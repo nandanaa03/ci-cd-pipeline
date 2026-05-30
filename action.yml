@@ -1,0 +1,27 @@
+name: 'AI Code Reviewer'
+description: 'Automatically reviews pull request code diffs using AI and posts feedback as a PR comment'
+author: 'nandanaa03'
+
+inputs:
+  openrouter-api-key:
+    description: 'OpenRouter API key for AI inference'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    - name: Install dependencies
+      run: pip install requests
+      shell: bash
+    - name: Run AI Review
+      env:
+        OPENROUTER_API_KEY: ${{ inputs.openrouter-api-key }}
+        GITHUB_TOKEN: ${{ github.token }}
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+        REPO: ${{ github.repository }}
+      run: python ${{ github.action_path }}/scripts/ai_review.py
+      shell: bash
