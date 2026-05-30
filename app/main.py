@@ -27,5 +27,10 @@ def reverse():
     data = request.json
     return jsonify({"reversed": data.get("text", "")[::-1]})
 
+@app.route('/uppercase', methods=['POST'])
+def uppercase():
+    data = request.json
+    return jsonify({"result": data.get("text", "").upper()})
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
