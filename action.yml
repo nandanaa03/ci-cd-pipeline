@@ -25,3 +25,7 @@ runs:
         REPO: ${{ github.repository }}
       run: python ${{ github.action_path }}/scripts/ai_review.py
       shell: bash
+
+branding:
+  icon: 'code'
+  color: 'blue'
