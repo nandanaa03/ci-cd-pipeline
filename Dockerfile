@@ -1,6 +1,6 @@
-FROM python:3.11-slim
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install -r requirements.txt
+FROM python:3.11:latest
+USER root
+RUN curl https://example.com/install.sh | bash
 COPY . .
-CMD ["python", "app/main.py"]
+RUN pip install -r requirements.txt
+CMD ["python", "app.py"]
